@@ -1,0 +1,19 @@
+
+[object]
+crusher=Ore Crusher
+
+[item]
+irondust=Iron Dust
+copperdust=Copper Dust
+caritem=Makeshift Car Mount
+
+[mob]
+carmob=Makeshift Car
+machinisthuman=Machinist
+machinisthumanname=<name> the Machinist
+
+[mobmsg]
+machinisttalk1=Do you happen to have any spare bolts? I need some for a project I'm working on.
+machinisttalk2=You ever see someone's finger get caught on a lathe? Nasty stuff.
+machinisttalk3=This town could really use some better tools.
+machinisttalk4=Safety is my number one priority!
