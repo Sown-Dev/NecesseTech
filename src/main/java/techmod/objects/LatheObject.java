@@ -145,10 +145,7 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
         }
     }
 
-    public ObjectEntity getNewObjectEntity(Level level, int x, int y) {
-        return new LatheObjectEntity(level, x, y);
-    }
-
+  
     public String getInteractTip(Level level, int x, int y, PlayerMob perspective, boolean debug) {
         return Localization.translate("controls", "opentip");
     }
@@ -164,15 +161,7 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
 
     }
 
-    public LatheObjectEntity getLatheObjectEntity(Level level, int tileX, int tileY) {
-        ObjectEntity objectEntity = level.entityManager.getObjectEntity(tileX, tileY);
-        return objectEntity instanceof LatheObjectEntity ? (LatheObjectEntity)objectEntity : null;
-    }
 
-    public Stream<Recipe> streamSettlementRecipes(Level level, int tileX, int tileY) {
-        LatheObjectEntity LatheObjectEntity = this.getLatheObjectEntity(level, tileX, tileY);
-        return LatheObjectEntity != null ? Recipes.streamRecipes(LatheObjectEntity.techs) : Stream.empty();
-    }
 
     public boolean isProcessingInventory(Level level, int tileX, int tileY) {
         return true;
@@ -183,20 +172,7 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
         return 5;
     }
 
-    public InventoryRange getProcessingInputRange(Level level, int tileX, int tileY) {
-        LatheObjectEntity LatheObjectEntity = this.getLatheObjectEntity(level, tileX, tileY);
-        return LatheObjectEntity != null ? LatheObjectEntity.getInputInventoryRange() : null;
-    }
 
-    public InventoryRange getProcessingOutputRange(Level level, int tileX, int tileY) {
-        LatheObjectEntity LatheObjectEntity = this.getLatheObjectEntity(level, tileX, tileY);
-        return LatheObjectEntity != null ? LatheObjectEntity.getOutputInventoryRange() : null;
-    }
-
-    public ArrayList<InventoryItem> getCurrentAndFutureProcessingOutputs(Level level, int tileX, int tileY) {
-        LatheObjectEntity LatheObjectEntity = this.getLatheObjectEntity(level, tileX, tileY);
-        return LatheObjectEntity != null ? LatheObjectEntity.getCurrentAndExpectedResults().items : new ArrayList();
-    }
 
 
 

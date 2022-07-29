@@ -39,6 +39,7 @@ import necesse.level.maps.levelData.settlementData.SettlementWorkstationObject;
 import necesse.level.maps.light.GameLight;
 import necesse.level.maps.multiTile.MultiTile;
 import necesse.level.maps.multiTile.SideMultiTile;
+import techmod.util.PoweredEntity;
 
 import static techmod.TechMod.CRUSHER;
 

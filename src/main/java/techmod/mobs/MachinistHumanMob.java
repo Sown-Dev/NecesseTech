@@ -128,7 +128,7 @@ public class MachinistHumanMob extends HumanShop {
     }
 
     protected ArrayList<GameMessage> getMessages(ServerClient client) {
-        ArrayList<GameMessage> out = this.getLocalMessages("machinisttalk", 4);
+        ArrayList<GameMessage> out = this.getLocalMessages("machinisttalk", 5);
 
         return out;
     }
