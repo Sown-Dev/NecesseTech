@@ -38,12 +38,14 @@ import necesse.level.maps.levelData.settlementData.SettlementWorkstationObject;
 import necesse.level.maps.light.GameLight;
 import necesse.level.maps.multiTile.MultiTile;
 import necesse.level.maps.multiTile.SideMultiTile;
+import techmod.util.PoweredEntity;
 
 import static techmod.TechMod.LATHE;
 
 public class LatheObject extends CraftingStationObject implements SettlementWorkstationObject {
     public GameTexture texture;
     protected int counterID;
+    boolean powered=false;
 
     public LatheObject() {
         super(new Rectangle(32, 32));
@@ -173,7 +175,9 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
     }
 
 
-
+    public boolean canCurrentlyCraft(Level level, int tileX, int tileY, Recipe recipe) {
+        return this.powered;
+    }
 
 
 
@@ -190,4 +194,6 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
         cb2o.counterID = cb1i;
         return new int[]{cb1i, cb2i};
     }
+
+
 }

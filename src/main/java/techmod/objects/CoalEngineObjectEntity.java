@@ -30,6 +30,7 @@ public class CoalEngineObjectEntity extends AnyLogFueledInventoryObjectEntity im
     public void serverTick() {
         super.serverTick();
         this.producing=this.isFueled() ? 1:0;
+
     }
 
     @Override
