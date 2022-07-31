@@ -25,7 +25,6 @@ import necesse.gfx.camera.GameCamera;
 import necesse.gfx.drawOptions.DrawOptions;
 import necesse.gfx.drawOptions.human.HumanDrawOptions;
 import necesse.gfx.drawables.OrderableDrawables;
-import necesse.gfx.gameTexture.GameTexture;
 import necesse.inventory.InventoryItem;
 import necesse.inventory.lootTable.LootItemInterface;
 import necesse.inventory.lootTable.LootTable;
@@ -44,10 +43,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static techmod.TechMod.MachinistTexture;
 import static techmod.util.Bruh.humanTextureFullfromString;
 
 public class MachinistHumanMob extends HumanShop {
-    static HumanTextureFull MachinistTexture= humanTextureFullfromString("mobs/humans/machinist");
+
     public MachinistHumanMob() {
         super(500, 200, "machinist", 50, 60);
         this.attackCooldown = 1000L;
@@ -58,14 +58,7 @@ public class MachinistHumanMob extends HumanShop {
         this.selectBox = new Rectangle(-14, -41, 28, 48);
     }
 
-    public void init() {
-        super.init();
-        this.ai = new BehaviourTreeAI(this, new MeleeHumanAI(400, true, true, this.attackDistance, 100, 25000), new AIMover(humanPathIterations));
-        if (this.getLevel().isClientLevel()) {
-            this.getLevel().getClient().network.sendPacket(new PacketQuestGiverRequest(this.getUniqueID()));
-        }
 
-    }
 
     public void spawnDeathParticles(float knockbackX, float knockbackY) {
         for(int i = 0; i < 4; ++i) {
@@ -127,10 +120,13 @@ public class MachinistHumanMob extends HumanShop {
         return HumanGender.MALE;
     }
 
+    public Point getRecruitedToIsland(ServerClient client) {
+        return this.isTravelingHuman() && SettlementLevelData.getSettlementData(this.getLevel()) != null ? new Point(this.getLevel().getIslandX(), this.getLevel().getIslandY()) : null;
+    }
     protected ArrayList<GameMessage> getMessages(ServerClient client) {
         ArrayList<GameMessage> out = this.getLocalMessages("machinisttalk", 6);
-
         return out;
+
     }
 
     public void showAttack(int x, int y, int seed, boolean showAllDirections) {
@@ -141,9 +137,6 @@ public class MachinistHumanMob extends HumanShop {
 
     }
 
-    public Point getRecruitedToIsland(ServerClient client) {
-        return this.isTravelingHuman() && SettlementLevelData.getSettlementData(this.getLevel()) != null ? new Point(this.getLevel().getIslandX(), this.getLevel().getIslandY()) : null;
-    }
 
     public List<InventoryItem> getRecruitItems(ServerClient client) {
         if (this.isSettler()) {
@@ -153,9 +146,9 @@ public class MachinistHumanMob extends HumanShop {
             if (this.isTravelingHuman()) {
                 return Collections.singletonList(new InventoryItem("coin", random.getIntBetween(350, 500)));
             }else{
-                LootTable secondItems = new LootTable(new LootItemInterface[]{new CountOfTicketLootItems(random.getIntBetween(1, 2), new Object[]{100, new LootItem("gobfish", 2147483647), 100, new LootItem("terrorfish", 2147483647), 100, new LootItem("halffish", 2147483647), 100, new LootItem("rockfish", 2147483647), 100, new LootItem("furfish", 2147483647), 100, new LootItem("icefish", 2147483647), 100, new LootItem("swampfish", 2147483647)})});
-                ArrayList<InventoryItem> out = GameLootUtils.getItemsValuedAt(random, random.getIntBetween(250, 400), 0.20000000298023224D, new LootItem("coin", 2147483647), new Object[0]);
-                out.addAll(GameLootUtils.getItemsValuedAt(random, random.getIntBetween(75, 150), 0.20000000298023224D, secondItems, new Object[0]));
+                LootTable items = new LootTable(new LootItemInterface[]{new LootItem("coin", 2147483647), });
+                int value = random.getIntBetween(300, 500);
+                ArrayList<InventoryItem> out = GameLootUtils.getItemsValuedAt(random, value, 0.20000000298023224D, items, new Object[0]);
                 out.sort(Comparator.comparing(InventoryItem::getBrokerValue).reversed());
                 return out;
             }

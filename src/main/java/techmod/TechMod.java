@@ -3,6 +3,7 @@ package techmod;
 import necesse.engine.commands.CommandsManager;
 import necesse.engine.modLoader.annotations.ModEntry;
 import necesse.engine.registries.*;
+import necesse.entity.mobs.HumanTextureFull;
 import necesse.entity.mobs.friendly.human.humanShop.GunsmithHumanMob;
 import necesse.gfx.gameTexture.GameTexture;
 import necesse.inventory.recipe.Ingredient;
@@ -11,18 +12,26 @@ import necesse.inventory.recipe.Recipes;
 import necesse.inventory.recipe.Tech;
 import necesse.level.gameObject.ProcessingForgeObject;
 import necesse.level.maps.biomes.Biome;
+import necesse.level.maps.levelData.settlementData.settler.GenericSettler;
+import necesse.level.maps.levelData.settlementData.settler.MageSettler;
+import necesse.level.maps.levelData.settlementData.settler.Settler;
 import techmod.items.*;
 import techmod.mobs.CarMob;
 import techmod.mobs.MachinistHumanMob;
+import techmod.mobs.MachinistSettler;
 import techmod.objects.*;
 
 import static necesse.engine.registries.RecipeTechRegistry.registerTech;
+import static techmod.util.Bruh.humanTextureFullfromString;
 
 @ModEntry
 public class TechMod {
     public static Tech LATHE;
     public static Tech CRUSHER;
+
+    public static HumanTextureFull MachinistTexture;
     public void init() {
+
 
         CRUSHER = registerTech("crusher");
         LATHE = registerTech("lathe");
@@ -40,14 +49,21 @@ public class TechMod {
         CrusherObject.registerCrusher();
         LatheObject.registerLathe();
         ObjectRegistry.registerObject("coalengine", new CoalEngineObject(), 30, true);
+
         //mobs
         MobRegistry.registerMob("car", CarMob.class, true);
         MobRegistry.registerMob("machinisthuman", MachinistHumanMob.class, true);
 
+
+
+        //settlers
+        SettlerRegistry.registerSettler("machinist", new MachinistSettler());
+
+
     }
 
     public void initResources() {
-
+        MachinistTexture= humanTextureFullfromString("mobs/humans/machinist");
     }
 
     public void postInit() {

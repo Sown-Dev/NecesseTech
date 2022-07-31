@@ -23,8 +23,8 @@ public class MachinistSettler extends Settler {
     }
 
     public void addNewRecruitSettler(SettlementLevelData data, boolean isRandomEvent, TicketSystemList<Supplier<HumanMob>> ticketSystem) {
-        if ((isRandomEvent || !this.doesSettlementHaveThisSettler(data)) ) {
-            ticketSystem.addObject(80, this.getNewRecruitMob(data));
+        if ((isRandomEvent || !this.doesSettlementHaveThisSettler(data)) && data.hasCompletedQuestTier("evilsprotector")) {
+            ticketSystem.addObject(70, this.getNewRecruitMob(data));
         }
 
     }
