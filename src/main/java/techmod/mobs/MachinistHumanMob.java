@@ -49,7 +49,7 @@ import static techmod.util.Bruh.humanTextureFullfromString;
 public class MachinistHumanMob extends HumanShop {
     static HumanTextureFull MachinistTexture= humanTextureFullfromString("mobs/humans/machinist");
     public MachinistHumanMob() {
-        super(500, 300, "machinist", 50, 60);
+        super(500, 200, "machinist", 50, 60);
         this.attackCooldown = 1000L;
         this.attackAnimSpeed = 500;
         this.attackWeaponStringID = "wrench";
@@ -69,7 +69,7 @@ public class MachinistHumanMob extends HumanShop {
 
     public void spawnDeathParticles(float knockbackX, float knockbackY) {
         for(int i = 0; i < 4; ++i) {
-            this.getLevel().entityManager.addParticle(new FleshParticle(this.getLevel(), MobRegistry.Textures.gunsmith.body, GameRandom.globalRandom.nextInt(5), 8, 32, this.x, this.y, 10.0F, knockbackX, knockbackY), Particle.GType.IMPORTANT_COSMETIC);
+            this.getLevel().entityManager.addParticle(new FleshParticle(this.getLevel(), MachinistTexture.body, GameRandom.globalRandom.nextInt(5), 8, 32, this.x, this.y, 10.0F, knockbackX, knockbackY), Particle.GType.IMPORTANT_COSMETIC);
         }
 
     }
@@ -128,7 +128,7 @@ public class MachinistHumanMob extends HumanShop {
     }
 
     protected ArrayList<GameMessage> getMessages(ServerClient client) {
-        ArrayList<GameMessage> out = this.getLocalMessages("machinisttalk", 5);
+        ArrayList<GameMessage> out = this.getLocalMessages("machinisttalk", 6);
 
         return out;
     }
@@ -152,9 +152,9 @@ public class MachinistHumanMob extends HumanShop {
             GameRandom random = new GameRandom((long)(this.getSettlerSeed() * 709));
             if (this.isTravelingHuman()) {
                 return Collections.singletonList(new InventoryItem("coin", random.getIntBetween(350, 500)));
-            } else {
-                LootTable secondItems = new LootTable(new LootItemInterface[]{new CountOfTicketLootItems(random.getIntBetween(1, 2), new Object[]{100, new LootItem("copperbar", 2147483647), 100, new LootItem("ironbar", 2147483647), 100, new LootItem("goldbar", 2147483647)})});
-                ArrayList<InventoryItem> out = GameLootUtils.getItemsValuedAt(random, random.getIntBetween(350, 500), 0.20000000298023224D, new LootItem("coin", 2147483647), new Object[0]);
+            }else{
+                LootTable secondItems = new LootTable(new LootItemInterface[]{new CountOfTicketLootItems(random.getIntBetween(1, 2), new Object[]{100, new LootItem("gobfish", 2147483647), 100, new LootItem("terrorfish", 2147483647), 100, new LootItem("halffish", 2147483647), 100, new LootItem("rockfish", 2147483647), 100, new LootItem("furfish", 2147483647), 100, new LootItem("icefish", 2147483647), 100, new LootItem("swampfish", 2147483647)})});
+                ArrayList<InventoryItem> out = GameLootUtils.getItemsValuedAt(random, random.getIntBetween(250, 400), 0.20000000298023224D, new LootItem("coin", 2147483647), new Object[0]);
                 out.addAll(GameLootUtils.getItemsValuedAt(random, random.getIntBetween(75, 150), 0.20000000298023224D, secondItems, new Object[0]));
                 out.sort(Comparator.comparing(InventoryItem::getBrokerValue).reversed());
                 return out;
@@ -168,9 +168,8 @@ public class MachinistHumanMob extends HumanShop {
         } else {
             ArrayList<ShopItem> out = new ArrayList();
             GameRandom random = new GameRandom(this.getShopSeed() + 5L);
-            BlacksmithHumanMob.addBarBuyRecipes(this, out, data, client, random);
-            out.add(ShopItem.item("irondust", this.getRandomHappinessPrice(random, 10, 20, 2)));
-            out.add(ShopItem.item("crusher", this.getRandomHappinessPrice(random, 1000, 1800, 100)));
+            out.add(ShopItem.item("wrench", this.getRandomHappinessPrice(random, 70, 140, 2)));
+            out.add(ShopItem.item("lathe", this.getRandomHappinessPrice(random, 1000, 1800, 100)));
 
             return out;
         }

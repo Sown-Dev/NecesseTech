@@ -36,7 +36,7 @@ public class CarMob extends MountFollowingMob {
         this.setSpeed(90.0F);
         this.setFriction(2.0F);
         this.setSwimSpeed(1.0F);
-        this.accelerationMod = 0.1F;
+        this.accelerationMod = 0.12F;
         this.setKnockbackModifier(0.1F);
         this.collision = new Rectangle(-10, -10, 20, 14);
         this.hitBox = new Rectangle(-14, -15, 28, 24);

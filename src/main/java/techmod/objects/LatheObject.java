@@ -176,7 +176,7 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
 
 
     public boolean canCurrentlyCraft(Level level, int tileX, int tileY, Recipe recipe) {
-        return this.powered;
+        return true;
     }
 
 

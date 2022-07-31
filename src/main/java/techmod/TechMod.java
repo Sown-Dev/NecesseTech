@@ -29,7 +29,10 @@ public class TechMod {
 
         //items
         ItemRegistry.registerItem("irondust", new IronDust(), 10, true);
-        ItemRegistry.registerItem("copperdust", new CopperDust(), 20, true);
+        ItemRegistry.registerItem("copperdust", new CopperDust(), 12, true);
+        ItemRegistry.registerItem("golddust", new GoldDust(), 14, true);
+        ItemRegistry.registerItem("axle", new Axle(), 16, true);
+
         ItemRegistry.registerItem("caritem", new CarItem(), 30, true);
         ItemRegistry.registerItem("testitem", new TestItem(), 40, true);
 
@@ -84,22 +87,51 @@ public class TechMod {
                 }
         ));
 
+
         Recipes.registerModRecipe(new Recipe(
-                "ironbar",
+                "golddust",
                 1,
+                CRUSHER,
+                new Ingredient[]{
+                        new Ingredient("goldore", 3)
+                }
+        ));
+
+
+        //Forge Recipes:
+        Recipes.registerModRecipe(new Recipe("ironbar", 1,
                 RecipeTechRegistry.FORGE,
                 new Ingredient[]{
                         new Ingredient("irondust", 1)
                 }
         ));
+        Recipes.registerModRecipe(new Recipe("goldbar", 1,
+                RecipeTechRegistry.FORGE,
+                new Ingredient[]{
+                        new Ingredient("golddust", 1)
+                }
+        ));
+        Recipes.registerModRecipe(new Recipe("copperbar", 1,
+                RecipeTechRegistry.FORGE,
+                new Ingredient[]{
+                        new Ingredient("copperdust", 1)
+                }
+        ));
 
-        Recipes.registerModRecipe(new Recipe(
-                "crusher",
-                1,
+
+        Recipes.registerModRecipe(new Recipe("crusher", 1,
                 LATHE,
                 new Ingredient[]{
                         new Ingredient("ironbar", 10),
-                        new Ingredient("wire", 10)
+                        new Ingredient("wire", 40)
+                }
+        ));
+        Recipes.registerModRecipe(new Recipe(
+                "axle",
+                1,
+                LATHE,
+                new Ingredient[]{
+                        new Ingredient("ironbar", 3),
                 }
         ));
 
@@ -109,6 +141,7 @@ public class TechMod {
                 LATHE,
                 new Ingredient[]{
                         new Ingredient("ironbar", 20),
+                        new Ingredient("axle", 5),
                         new Ingredient("forge", 2)
                 }
         ));
