@@ -28,12 +28,7 @@ public class CarItem extends MountItem implements PlaceableItemInterface {
         super("car");
     }
 
-    public ListGameTooltips getTooltips(InventoryItem item, PlayerMob perspective) {
-        ListGameTooltips tooltips = this.getBaseTooltips(item, perspective);
-        tooltips.add(Localization.translate("itemtooltip", "boattip1"));
-        tooltips.add(Localization.translate("itemtooltip", "boattip2"));
-        return tooltips;
-    }
+
 
     public void setDrawAttackRotation(InventoryItem item, ItemAttackDrawOptions drawOptions, float attackDirX, float attackDirY, float attackProgress) {
         drawOptions.swingRotation(attackProgress);

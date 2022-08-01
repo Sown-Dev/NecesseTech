@@ -5,6 +5,7 @@ import necesse.engine.localization.message.GameMessage;
 import necesse.engine.localization.message.LocalMessage;
 import necesse.engine.network.packet.PacketQuestGiverRequest;
 import necesse.engine.network.server.ServerClient;
+import necesse.engine.registries.ItemRegistry;
 import necesse.engine.registries.MobRegistry;
 import necesse.engine.sound.SoundEffect;
 import necesse.engine.tickManager.TickManager;

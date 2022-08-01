@@ -28,6 +28,7 @@ import static techmod.util.Bruh.humanTextureFullfromString;
 public class TechMod {
     public static Tech LATHE;
     public static Tech CRUSHER;
+    public static Tech RECYCLER;
 
     public static HumanTextureFull MachinistTexture;
     public void init() {
@@ -35,6 +36,7 @@ public class TechMod {
 
         CRUSHER = registerTech("crusher");
         LATHE = registerTech("lathe");
+        RECYCLER = registerTech("recycler");
 
         //items
         ItemRegistry.registerItem("irondust", new IronDust(), 10, true);
@@ -48,6 +50,7 @@ public class TechMod {
         //objects
         CrusherObject.registerCrusher();
         LatheObject.registerLathe();
+        RecyclerObject.registerRecycler();
         ObjectRegistry.registerObject("coalengine", new CoalEngineObject(), 30, true);
 
         //mobs
