@@ -164,6 +164,18 @@ public class TechMod {
                         new Ingredient("forge", 2)
                 }
         ));
+
+
+
+        //recycler:
+        Recipes.registerModRecipe(new Recipe(
+                "stone",
+                1,
+                RECYCLER,
+                new Ingredient[]{
+                        new Ingredient("arrow", 1)
+                }
+        ));
     }
 
 }
