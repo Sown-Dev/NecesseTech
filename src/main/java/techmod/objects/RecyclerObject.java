@@ -54,7 +54,6 @@ public class RecyclerObject extends GameObject implements SettlementWorkstationO
         this.isLightTransparent = true;
         this.drawDmg = false;
         this.isLightTransparent = true;
-        this.roomProperties.add("metalwork");
         this.lightHue = 50.0F;
         this.lightSat = 0.2F;
     }

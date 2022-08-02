@@ -2,6 +2,7 @@ package techmod.objects;
 
 import necesse.engine.registries.RecipeTechRegistry;
 import necesse.entity.objectEntity.AnyLogFueledProcessingTechInventoryObjectEntity;
+import necesse.gfx.GameResources;
 import necesse.inventory.InventoryItem;
 import necesse.inventory.recipe.Recipe;
 import necesse.inventory.recipe.Tech;
@@ -14,6 +15,7 @@ public class CrusherObjectEntity extends AnyLogFueledProcessingTechInventoryObje
 
     public CrusherObjectEntity(Level level, int x, int y) {
         super(level, "crusher", x, y, 2, 2, false, false, true, new Tech[]{TechMod.CRUSHER});
+        this.workingSound = GameResources.shake;
     }
 
     public int getFuelTime(InventoryItem item) {

@@ -141,8 +141,16 @@ public class TechMod {
         Recipes.registerModRecipe(new Recipe("crusher", 1,
                 LATHE,
                 new Ingredient[]{
-                        new Ingredient("ironbar", 10),
+                        new Ingredient("ironbar", 12),
                         new Ingredient("wire", 40)
+                }
+        ));
+        Recipes.registerModRecipe(new Recipe("recycler", 1,
+                LATHE,
+                new Ingredient[]{
+                        new Ingredient("copperbar", 5),
+                        new Ingredient("axle", 2),
+                        new Ingredient("ironbar", 5)
                 }
         ));
         Recipes.registerModRecipe(new Recipe(
@@ -173,7 +181,15 @@ public class TechMod {
                 1,
                 RECYCLER,
                 new Ingredient[]{
-                        new Ingredient("arrow", 1)
+                        new Ingredient("stonearrow", 2)
+                }
+        ));
+        Recipes.registerModRecipe(new Recipe(
+                "ironbar",
+                1,
+                RECYCLER,
+                new Ingredient[]{
+                        new Ingredient("ironarrow", 8)
                 }
         ));
     }
