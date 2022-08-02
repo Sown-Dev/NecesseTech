@@ -1,12 +1,7 @@
 package techmod.objects;
 
-import necesse.engine.Screen;
-import necesse.engine.registries.RecipeTechRegistry;
-import necesse.engine.sound.SoundEffect;
-import necesse.engine.sound.SoundPlayer;
 import necesse.entity.objectEntity.AnyLogFueledProcessingTechInventoryObjectEntity;
 import necesse.gfx.GameResources;
-import necesse.gfx.gameSound.GameSound;
 import necesse.inventory.InventoryItem;
 import necesse.inventory.recipe.Recipe;
 import necesse.inventory.recipe.Tech;
@@ -19,7 +14,7 @@ public class RecyclerObjectEntity extends AnyLogFueledProcessingTechInventoryObj
 
 
     public RecyclerObjectEntity(Level level, int x, int y) {
-        super(level, "recycler", x, y, 2, 3, false, false, true, new Tech[]{TechMod.RECYCLER});
+        super(level, "recycler", x, y, 2, 3, false, false, true, TechMod.RECYCLER);
         this.workingSound = GameResources.shake;
     }
 

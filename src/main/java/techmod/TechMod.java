@@ -43,6 +43,7 @@ public class TechMod {
         ItemRegistry.registerItem("copperdust", new CopperDust(), 12, true);
         ItemRegistry.registerItem("golddust", new GoldDust(), 14, true);
         ItemRegistry.registerItem("axle", new Axle(), 16, true);
+        ItemRegistry.registerItem("coal", new Coal(), 18, true);
 
         ItemRegistry.registerItem("caritem", new CarItem(), 30, true);
         ItemRegistry.registerItem("testitem", new TestItem(), 40, true);
