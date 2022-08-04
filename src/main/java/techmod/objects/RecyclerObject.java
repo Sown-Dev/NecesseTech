@@ -233,7 +233,7 @@ public class RecyclerObject extends GameObject implements SettlementWorkstationO
     public static int[] registerRecycler() {
         RecyclerObject cb1o = new RecyclerObject();
         Recycler2Object cb2o = new Recycler2Object();
-        int cb1i = ObjectRegistry.registerObject("recycler", cb1o, 20.0F, true);
+        int cb1i = ObjectRegistry.registerObject("recycler", cb1o, 200.0F, true);
         int cb2i = ObjectRegistry.registerObject("recycler2", cb2o, 0.0F, false);
         cb1o.counterID = cb2i;
         cb2o.counterID = cb1i;
