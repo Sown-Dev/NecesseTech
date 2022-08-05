@@ -164,7 +164,7 @@ public class MachinistHumanMob extends HumanShop {
             GameRandom random = new GameRandom(this.getShopSeed() + 5L);
             out.add(ShopItem.item("wrench", this.getRandomHappinessPrice(random, 70, 140, 2)));
             out.add(ShopItem.item("lathe", this.getRandomHappinessPrice(random, 1000, 1800, 100)));
-
+            out.add(ShopItem.item("coal", this.getRandomHappinessPrice(random, 15, 35, 3)));
             return out;
         }
     }
