@@ -211,6 +211,17 @@ public class TechMod {
                         new Ingredient("ironarrow", 8)
                 }
         ));
+
+
+        Recipes.registerModRecipe(new Recipe(
+                "lathe",
+                1,
+                RecipeTechRegistry.WORKSTATION,
+                new Ingredient[]{
+                        new Ingredient("ironbar", 30),
+                        new Ingredient("brokenirontool", 2),
+                }
+        ));
     }
 
 }

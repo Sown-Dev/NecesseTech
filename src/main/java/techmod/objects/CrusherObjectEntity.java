@@ -23,6 +23,10 @@ public class CrusherObjectEntity extends AnyLogFueledProcessingTechInventoryObje
         return item.item instanceof Coal;
     }
 
+    public int getNextFuelBurnTime(boolean useFuel) {
+        return this.itemToBurnTime(useFuel, (item) -> item.item instanceof Coal ? this.getFuelTime(item) : 0);
+    }
+
     public int getFuelTime(InventoryItem item) {
         return logFuelTime;
     }
@@ -30,4 +34,5 @@ public class CrusherObjectEntity extends AnyLogFueledProcessingTechInventoryObje
     public int getProcessTime(Recipe recipe) {
         return recipeProcessTime;
     }
+
 }
