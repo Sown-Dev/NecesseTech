@@ -18,7 +18,6 @@ public class RecyclerObjectEntity extends FueledProcessingTechInventoryObjectEnt
 
     public RecyclerObjectEntity(Level level, int x, int y) {
         super(level, "recycler", x, y, 2, 2, 3,false, false, true, TechMod.RECYCLER);
-        //this.workingSound = GameResources.shake;
     }
 
     public boolean isValidFuelItem(InventoryItem item) {
