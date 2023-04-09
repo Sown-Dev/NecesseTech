@@ -17,7 +17,7 @@ import necesse.level.gameObject.ProcessingForgeObject;
 import necesse.level.gameObject.RockObject;
 import necesse.level.gameObject.RockOreObject;
 import necesse.level.maps.biomes.Biome;
-import necesse.level.maps.biomes.ForestBiome;
+import necesse.level.maps.biomes.forest.ForestBiome;
 import necesse.level.maps.levelData.settlementData.settler.GenericSettler;
 import necesse.level.maps.levelData.settlementData.settler.MageSettler;
 import necesse.level.maps.levelData.settlementData.settler.Settler;

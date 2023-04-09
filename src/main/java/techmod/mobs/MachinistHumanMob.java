@@ -1,59 +1,49 @@
 package techmod.mobs;
 
-import necesse.engine.Screen;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Consumer;
 import necesse.engine.localization.message.GameMessage;
-import necesse.engine.localization.message.LocalMessage;
-import necesse.engine.network.packet.PacketQuestGiverRequest;
 import necesse.engine.network.server.ServerClient;
-import necesse.engine.registries.ItemRegistry;
-import necesse.engine.registries.MobRegistry;
-import necesse.engine.sound.SoundEffect;
+import necesse.engine.registries.MobRegistry.Textures;
 import necesse.engine.tickManager.TickManager;
 import necesse.engine.util.GameLootUtils;
 import necesse.engine.util.GameRandom;
-import necesse.entity.mobs.*;
-import necesse.entity.mobs.ai.behaviourTree.BehaviourTreeAI;
-import necesse.entity.mobs.ai.behaviourTree.trees.HumanAI;
-import necesse.entity.mobs.ai.behaviourTree.trees.MeleeHumanAI;
-import necesse.entity.mobs.ai.behaviourTree.util.AIMover;
-import necesse.entity.mobs.friendly.human.HumanMob;
-import necesse.entity.mobs.friendly.human.humanShop.BlacksmithHumanMob;
-import necesse.entity.mobs.friendly.human.humanShop.HumanShop;
+import necesse.entity.mobs.MobDrawable;
+import necesse.entity.mobs.PlayerMob;
+import necesse.entity.mobs.QuestMarkerOptions;
 import necesse.entity.particle.FleshParticle;
 import necesse.entity.particle.Particle;
-import necesse.gfx.GameResources;
 import necesse.gfx.camera.GameCamera;
 import necesse.gfx.drawOptions.DrawOptions;
 import necesse.gfx.drawOptions.human.HumanDrawOptions;
 import necesse.gfx.drawables.OrderableDrawables;
+import necesse.gfx.GameResources;
 import necesse.inventory.InventoryItem;
 import necesse.inventory.lootTable.LootItemInterface;
 import necesse.inventory.lootTable.LootTable;
-import necesse.inventory.lootTable.lootItem.CountOfTicketLootItems;
 import necesse.inventory.lootTable.lootItem.LootItem;
 import necesse.level.maps.Level;
 import necesse.level.maps.levelData.settlementData.SettlementLevelData;
 import necesse.level.maps.levelData.villageShops.ShopItem;
 import necesse.level.maps.levelData.villageShops.VillageShopsData;
 import necesse.level.maps.light.GameLight;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Consumer;
-
+import necesse.entity.mobs.friendly.human.humanShop.HumanShop;
+import necesse.engine.Screen;
+import necesse.engine.sound.SoundEffect;
 import static techmod.TechMod.MachinistTexture;
-import static techmod.util.Bruh.humanTextureFullfromString;
 
 public class MachinistHumanMob extends HumanShop {
 
     public MachinistHumanMob() {
-        super(500, 200, "machinist", 50, 60);
-        this.attackCooldown = 1000L;
+        super(500, 200, "machinist");
+        this.attackCooldown = 1000;
         this.attackAnimSpeed = 500;
-        this.attackWeaponStringID = "wrench";
+        this.equipmentInventory.setItem(6, new InventoryItem("wrench"));
         this.collision = new Rectangle(-10, -7, 20, 14);
         this.hitBox = new Rectangle(-14, -12, 28, 24);
         this.selectBox = new Rectangle(-14, -41, 28, 48);
@@ -94,16 +84,22 @@ public class MachinistHumanMob extends HumanShop {
                 drawY += this.getBobbing(x, y);
                 drawY += this.getLevel().getTile(x / 32, y / 32).getMobSinkingAmount(this);
                 HumanDrawOptions humanOptions = (new HumanDrawOptions(MachinistTexture)).chestplate(this.getDisplayArmor(1, "labapron")).boots(this.getDisplayArmor(2, "labboots")).sprite(sprite).dir(this.dir).light(light);
-                float animProgress = this.getAttackAnimProgress();
-                if (this.isAttacking) {
-                    humanOptions.itemAttack(new InventoryItem(this.attackWeaponStringID), (PlayerMob)null, animProgress, this.attackDir.x, this.attackDir.y);
+                if (this.inLiquid(x, y)) {
+                    drawY -= 10;
+                    humanOptions.armSprite(2);
+                    humanOptions.mask(Textures.boat_mask[sprite.y % 4], 0, -7);
                 }
 
                 humanOptions = this.setCustomItemAttackOptions(humanOptions);
                 final DrawOptions drawOptions = humanOptions.pos(drawX, drawY);
+                final DrawOptions boat = this.inLiquid(x, y) ? Textures.woodBoat.initDraw().sprite(0, this.dir % 4, 64).light(light).pos(drawX, drawY + 7) : null;
                 final DrawOptions markerOptions = this.getMarkerDrawOptions(x, y, light, camera, 0, -45, perspective);
                 list.add(new MobDrawable() {
                     public void draw(TickManager tickManager) {
+                        if (boat != null) {
+                            boat.draw();
+                        }
+
                         drawOptions.draw();
                         markerOptions.draw();
                     }
