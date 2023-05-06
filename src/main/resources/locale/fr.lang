@@ -1,0 +1,26 @@
+[objet]
+crusher=Broyeur de Minerai
+coalengine=Moteur à Charbon
+lathe=Tour
+recycler=Recycleur
+
+[item]
+irondust=Poussière de Fer
+copperdust=Poussière de Cuivre
+golddust=Poussière d'Or
+axle=Essieu en Fer
+caritem=Support de Voiture Improvisé
+coal=Charbon
+
+[mob]
+carmob=Voiture Improvisée
+machinisthuman=Mécanicien
+machinisthumanname=<nom> le Mécanicien
+
+[mobmsg]
+machinisttalk1=Auriez-vous des boulons de rechange ? J'en ai besoin pour un projet sur lequel je travaille.
+machinisttalk2=Avez-vous déjà vu quelqu'un se faire coincer le doigt dans un tour ? C'est une situation terrible.
+machinisttalk3=Cette ville aurait vraiment besoin d'outils de meilleure qualité.
+machinisttalk4=La sécurité est ma priorité numéro un !
+machinisttalk5=Avez-vous vu mon mètre ruban ?
+machinisttalk6=Vous savez pourquoi on m'appelle mécanicien, n'est-ce pas ?
