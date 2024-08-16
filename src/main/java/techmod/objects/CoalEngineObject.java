@@ -1,24 +1,20 @@
 package techmod.objects;
 
+import necesse.engine.gameLoop.tickManager.TickManager;
 import necesse.engine.localization.Localization;
 import necesse.engine.network.packet.PacketOpenContainer;
 import necesse.engine.registries.ContainerRegistry;
-import necesse.engine.tickManager.TickManager;
 import necesse.engine.util.GameRandom;
 import necesse.entity.mobs.PlayerMob;
-import necesse.entity.objectEntity.CampfireObjectEntity;
 import necesse.entity.objectEntity.FueledInventoryObjectEntity;
 import necesse.entity.objectEntity.ObjectEntity;
 import necesse.entity.particle.Particle;
 import necesse.entity.particle.ParticleOption;
 import necesse.gfx.camera.GameCamera;
-import necesse.gfx.drawOptions.DrawOptions;
 import necesse.gfx.drawOptions.texture.TextureDrawOptions;
 import necesse.gfx.drawables.LevelSortedDrawable;
 import necesse.gfx.drawables.OrderableDrawables;
 import necesse.gfx.gameTexture.GameTexture;
-import necesse.gfx.gameTooltips.ListGameTooltips;
-import necesse.inventory.InventoryItem;
 import necesse.inventory.item.toolItem.ToolType;
 import necesse.level.gameObject.GameObject;
 import necesse.level.maps.Level;
@@ -34,7 +30,7 @@ public class CoalEngineObject extends GameObject {
         super(new Rectangle(4, 6, 24, 50));
         this.mapColor = new Color(90, 71, 41);
         this.displayMapTooltip = true;
-        this.drawDmg = false;
+        this.drawDamage = false;
         this.objectHealth = 50;
         this.toolType = ToolType.ALL;
         this.isLightTransparent = true;
