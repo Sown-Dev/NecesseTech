@@ -4,22 +4,14 @@ package techmod.objects;
 //
 
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+import necesse.engine.gameLoop.tickManager.TickManager;
 import necesse.engine.localization.Localization;
 import necesse.engine.registries.ContainerRegistry;
 import necesse.engine.registries.ObjectRegistry;
-import necesse.engine.registries.RecipeTechRegistry;
-import necesse.engine.tickManager.TickManager;
-import necesse.engine.util.GameRandom;
 import necesse.entity.mobs.PlayerMob;
 import necesse.entity.objectEntity.ObjectEntity;
-import necesse.entity.particle.Particle.GType;
 import necesse.gfx.camera.GameCamera;
 import necesse.gfx.drawOptions.DrawOptionsList;
-import necesse.gfx.drawOptions.texture.TextureDrawOptions;
 import necesse.gfx.drawables.LevelSortedDrawable;
 import necesse.gfx.drawables.OrderableDrawables;
 import necesse.gfx.gameTexture.GameTexture;
@@ -39,7 +31,11 @@ import necesse.level.maps.levelData.settlementData.SettlementWorkstationObject;
 import necesse.level.maps.light.GameLight;
 import necesse.level.maps.multiTile.MultiTile;
 import necesse.level.maps.multiTile.SideMultiTile;
-import techmod.util.PoweredEntity;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static techmod.TechMod.CRUSHER;
 
@@ -52,7 +48,7 @@ public class CrusherObject extends GameObject implements SettlementWorkstationOb
         this.mapColor = new Color(170, 150, 150);
         this.toolType = ToolType.ALL;
         this.isLightTransparent = true;
-        this.drawDmg = false;
+        this.drawDamage = false;
         this.isLightTransparent = true;
         this.roomProperties.add("metalwork");
         this.lightHue = 50.0F;

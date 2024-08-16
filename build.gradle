@@ -7,8 +7,8 @@ plugins {
 
 project.ext.modID = "sown.techmod" // The unique id of your mod. Must be all lowercase and cannot use special characters.
 project.ext.modName = "Necesse Tech" // The display name of your mod.
-project.ext.modVersion = "1.0" // Your current builds version. Must follow the xx.xx... format.
-project.ext.gameVersion = "0.21.29" // The target game version.
+project.ext.modVersion = "1.1" // Your current builds version. Must follow the xx.xx... format.
+project.ext.gameVersion = "0.26.1" // The target game version.
 project.ext.modDescription = "Adds useful machines" // Short description of what your mod is.
 project.ext.author = "Sown" // Your name
 
@@ -28,7 +28,7 @@ project.ext.clientside = false
 //project.ext.modOptionalDependencies = ["optional.modid1", "optional.modid2"]
 
 // The path to the games install directory
-def gameDirectory = "D:/SteamLibrary/steamapps/common/Necesse"
+def gameDirectory = "C:/Program Files (x86)/Steam/steamapps/common/Necesse"
 
 // =================================================
 // ========== DO NOT EDIT BELOW THIS LINE ==========
@@ -47,9 +47,14 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    libDepends
+}
+
 sourceSets.main.output.resourcesDir = file("build/mod/resources/")
 sourceSets.main.java.outputDir = file("build/mod/")
-def buildLocation = "build/jar"
+sourceSets.main.compileClasspath += configurations.libDepends // Adds libDepends configuration to classpath
+def buildLocation = "build/jar/"
 
 compileJava.options.encoding = "UTF-8"
 
@@ -61,21 +66,11 @@ dependencies {
     implementation files(gameDirectory + "/Necesse.jar")
     implementation fileTree(gameDirectory + "/lib/")
     implementation fileTree("./mods/") // Add all mods located in local mods folder
-}
 
-classes.doLast {
-    // Creates mod.info file
-    new File("${sourceSets.main.java.outputDir}/mod.info").text = "{\n" +
-            "   id = ${project.ext.modID},\n" +
-            "   name = ${project.ext.modName},\n" +
-            "   version = ${project.ext.modVersion},\n" +
-            "   gameVersion = ${project.ext.gameVersion},\n" +
-            "   description = ${project.ext.modDescription},\n" +
-            "   author = ${project.ext.author},\n" +
-            (project.ext.clientside ? "   clientside = " + project.ext.clientside + ",\n" : "") +
-            (project.ext.has("modDependencies") ? "   dependencies = [" + project.ext.modDependencies.join(", ") + "],\n" : "") +
-            (project.ext.has("modOptionalDependencies") ? "   optionalDependencies = [" + project.ext.modOptionalDependencies.join(", ") + "],\n" : "") +
-            "}"
+    // Add any third party library dependencies here. Remember to use libDepends, so that they will be added to your jar on build
+    // These are some examples:
+//    libDepends group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+//    libDepends files("path/to/library/jar.jar")
 }
 
 task createAppID {
@@ -83,9 +78,30 @@ task createAppID {
     description "Creates steam_appid.txt file"
 
     doLast {
-        new File("steam_appid.txt").text = "1169040"
+        file("steam_appid.txt").text = "1169040"
     }
 }
+
+task createModInfoFile(type: JavaExec) {
+    group "necesse"
+    description "Creates the mod info file"
+
+    classpath = files(gameDirectory + "/Necesse.jar")
+
+    main = "CreateModInfoFile"
+    args "-file", "${sourceSets.main.java.outputDir}/mod.info",
+            "-id", "${project.ext.modID}",
+            "-name", "${project.ext.modName}",
+            "-version", "${project.ext.modVersion}",
+            "-gameVersion", "${project.ext.gameVersion}",
+            "-description", "${project.ext.modDescription}",
+            "-author", "${project.ext.author}",
+            "-clientside", "${project.ext.clientside}",
+            "-dependencies", project.ext.has("modDependencies") ? "[" + project.ext.modDependencies.join(", ") + "]" : "",
+            "-optionalDependencies", project.ext.has("modOptionalDependencies") ? "[" + project.ext.modOptionalDependencies.join(", ") + "]" : ""
+}
+// Makes compiling also create mod info file
+classes.dependsOn("createModInfoFile")
 
 task runClient(type: JavaExec) {
     group "necesse"
@@ -94,9 +110,9 @@ task runClient(type: JavaExec) {
 
     classpath = files(gameDirectory + "/Necesse.jar")
 
-    main = "StartClient"
-    jvmArgs "-Xms512m", "-Xmx3G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
-    args "-mod \"${buildLocation}\""
+    main = "StartSteamClient"
+    jvmArgs "-Xms512m", "-Xmx4G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
+    args "-dev", "-mod \"${buildLocation}\""
 }
 
 task runDevClient(type: JavaExec) {
@@ -106,8 +122,8 @@ task runDevClient(type: JavaExec) {
 
     classpath = files(gameDirectory + "/Necesse.jar")
 
-    main = "StartClient"
-    jvmArgs "-Xms512m", "-Xmx3G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
+    main = "StartSteamClient"
+    jvmArgs "-Xms512m", "-Xmx4G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
     args "-dev 1", "-mod \"${buildLocation}\""
 }
 
@@ -118,8 +134,8 @@ task runServer(type: JavaExec) {
 
     classpath = files(gameDirectory + "/Server.jar")
 
-    main = "StartServer"
-    jvmArgs "-Xms512m", "-Xmx3G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
+    main = "StartDesktopServer"
+    jvmArgs "-Xms512m", "-Xmx4G", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseG1GC", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20", "-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M"
     args "-mod \"${buildLocation}\""
 }
 
@@ -128,8 +144,16 @@ task buildModJar(type: Jar) {
     description "Generates the mod jar into the build folder"
     dependsOn "classes"
 
+    doFirst {
+        fileTree(dir: buildLocation).exclude("${jarName}.jar").visit { FileVisitDetails details ->
+            delete details.file
+        }
+    }
+
     // Add mod output
     from sourceSets.main.java.outputDir
+    // Add the dependencies
+    from configurations.libDepends.collect { it.isDirectory() ? it : zipTree(it) }
 
     archiveName "${jarName}.jar"
     destinationDir file(buildLocation)

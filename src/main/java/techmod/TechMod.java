@@ -2,35 +2,32 @@ package techmod;
 
 import necesse.engine.GameEventListener;
 import necesse.engine.GameEvents;
-import necesse.engine.commands.CommandsManager;
 import necesse.engine.events.worldGeneration.GeneratedCaveOresEvent;
+import necesse.engine.localization.message.GameMessage;
+import necesse.engine.localization.message.LocalMessage;
 import necesse.engine.modLoader.annotations.ModEntry;
 import necesse.engine.registries.*;
-import necesse.entity.mobs.HumanTextureFull;
-import necesse.entity.mobs.friendly.human.humanShop.GunsmithHumanMob;
 import necesse.gfx.gameTexture.GameTexture;
 import necesse.inventory.recipe.Ingredient;
 import necesse.inventory.recipe.Recipe;
 import necesse.inventory.recipe.Recipes;
 import necesse.inventory.recipe.Tech;
-import necesse.level.gameObject.ProcessingForgeObject;
 import necesse.level.gameObject.RockObject;
 import necesse.level.gameObject.RockOreObject;
-import necesse.level.maps.biomes.Biome;
 import necesse.level.maps.biomes.forest.ForestBiome;
-import necesse.level.maps.levelData.settlementData.settler.GenericSettler;
-import necesse.level.maps.levelData.settlementData.settler.MageSettler;
-import necesse.level.maps.levelData.settlementData.settler.Settler;
 import techmod.items.*;
 import techmod.mobs.CarMob;
+import techmod.mobs.CarMountMob;
 import techmod.mobs.MachinistHumanMob;
 import techmod.mobs.MachinistSettler;
-import techmod.objects.*;
+import techmod.objects.CoalEngineObject;
+import techmod.objects.CrusherObject;
+import techmod.objects.LatheObject;
+import techmod.objects.RecyclerObject;
 
 import java.awt.*;
 
 import static necesse.engine.registries.RecipeTechRegistry.registerTech;
-import static techmod.util.Bruh.humanTextureFullfromString;
 
 @ModEntry
 public class TechMod {
@@ -38,13 +35,14 @@ public class TechMod {
     public static Tech CRUSHER;
     public static Tech RECYCLER;
 
-    public static HumanTextureFull MachinistTexture;
+    public static GameTexture carMobTexture;
     public void init() {
 
 
-        CRUSHER = registerTech("crusher");
-        LATHE = registerTech("lathe");
-        RECYCLER = registerTech("recycler");
+        // itemStringID isn't used for anything currently so pass in a dummy String value
+        CRUSHER = registerTech("crusher", "crusheritem");
+        LATHE = registerTech("lathe", "latheitem");
+        RECYCLER = registerTech("recycler", "recycleritem");
 
         //items
         ItemRegistry.registerItem("irondust", new IronDust(), 10, true);
@@ -57,8 +55,6 @@ public class TechMod {
         ItemRegistry.registerItem("testitem", new TestItem(), 0, true);
 
         //objects
-        //RockObject rock= new RockObject("rock", new Color(105, 105, 105), "stone");
-
         CrusherObject.registerCrusher();
         LatheObject.registerLathe();
         RecyclerObject.registerRecycler();
@@ -67,9 +63,8 @@ public class TechMod {
 
         //mobs
         MobRegistry.registerMob("car", CarMob.class, true);
+        MobRegistry.registerMob("carmount", CarMountMob.class, false, false, new LocalMessage("mob", "car"), (GameMessage)null);
         MobRegistry.registerMob("machinisthuman", MachinistHumanMob.class, true);
-
-
 
         //settlers
         SettlerRegistry.registerSettler("machinist", new MachinistSettler());
@@ -85,7 +80,7 @@ public class TechMod {
     }
 
     public void initResources() {
-        MachinistTexture= humanTextureFullfromString("mobs/humans/machinist");
+        carMobTexture = MobRegistry.Textures.fromFile("car");
     }
 
     public void postInit() {
