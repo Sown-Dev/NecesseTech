@@ -14,7 +14,7 @@ caritem=Makeshift Car Mount
 coal=Coal
 
 [mob]
-carmob=Makeshift Car
+car=Makeshift Car
 machinisthuman=Machinist
 machinisthumanname=<name> the Machinist
 
@@ -25,3 +25,6 @@ machinisttalk3=This town could really use some better tools.
 machinisttalk4=Safety is my number one priority!
 machinisttalk5=Have you seen my measuring tape?
 machinisttalk6=You know why the call me a machinist, right?
+
+[misc]
+carplacetip=To pick up the car again, hit it with a weapon!
