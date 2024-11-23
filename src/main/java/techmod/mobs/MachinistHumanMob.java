@@ -96,7 +96,7 @@ public class MachinistHumanMob extends HumanShop {
     }
 
     public QuestMarkerOptions getMarkerOptions(PlayerMob perspective) {
-        return this.isTravelingHuman() ? new QuestMarkerOptions('?', QuestMarkerOptions.orangeColor) : super.getMarkerOptions(perspective);
+        return this.isVisitor() ? new QuestMarkerOptions('?', QuestMarkerOptions.orangeColor) : super.getMarkerOptions(perspective);
     }
 
     protected ArrayList<GameMessage> getMessages(ServerClient client) {
@@ -119,7 +119,7 @@ public class MachinistHumanMob extends HumanShop {
             return null;
         } else {
             GameRandom random = new GameRandom((long)(this.getSettlerSeed() * 709L));
-            if (this.isTravelingHuman()) {
+            if (this.isVisitor()) {
                 return Collections.singletonList(new InventoryItem("coin", random.getIntBetween(350, 500)));
             }else{
                 LootTable items = new LootTable(new LootItemInterface[]{new LootItem("coin", 2147483647), });
@@ -132,7 +132,7 @@ public class MachinistHumanMob extends HumanShop {
     }
 
     public ArrayList<ShopItem> getShopItems(VillageShopsData data, ServerClient client) {
-        if (this.isTravelingHuman()) {
+        if (this.isVisitor()) {
             return null;
         } else {
             ArrayList<ShopItem> out = new ArrayList();

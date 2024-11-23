@@ -63,16 +63,6 @@ public class Crusher2Object extends GameObject  {
         }
     }
 
-    public List<ObjectHoverHitbox> getHoverHitboxes(Level level, int tileX, int tileY) {
-        List<ObjectHoverHitbox> list = super.getHoverHitboxes(level, tileX, tileY);
-        byte rotation = level.getObjectRotation(tileX, tileY);
-        if (rotation == 1 || rotation == 3) {
-            list.add(new ObjectHoverHitbox(tileX, tileY, 0, -16, 32, 16));
-        }
-
-        return list;
-    }
-
     public void addDrawables(List<LevelSortedDrawable> list, OrderableDrawables tileList, Level level, int tileX, int tileY, TickManager tickManager, GameCamera camera, PlayerMob perspective) {
         GameLight light = level.getLightLevel(tileX, tileY);
         int drawX = camera.getTileDrawX(tileX);

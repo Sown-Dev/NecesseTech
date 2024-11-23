@@ -48,14 +48,6 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
     public MultiTile getMultiTile(int rotation) {
         return new SideMultiTile(0, 1, 1, 2, rotation, true, new int[]{this.counterID, this.getID()});
     }
-    public int getPlaceRotation(Level level, int targetX, int targetY, PlayerMob player, int playerDir) {
-        return Math.floorMod(super.getPlaceRotation(level, targetX, targetY, player, playerDir) - 1, 4);
-    }
-
-
-
-
-
 
     public void loadTextures() {
         super.loadTextures();
@@ -71,16 +63,6 @@ public class LatheObject extends CraftingStationObject implements SettlementWork
             return rotation == 2 ? new Rectangle(x * 32 + 5, y * 32 + 16, 22, 16) : new Rectangle(x * 32, y * 32 + 6, 20, 20);
         }
     }
-    public List<ObjectHoverHitbox> getHoverHitboxes(Level level, int tileX, int tileY) {
-        List<ObjectHoverHitbox> list = super.getHoverHitboxes(level, tileX, tileY);
-        byte rotation = level.getObjectRotation(tileX, tileY);
-        if (rotation == 1 || rotation == 3) {
-            list.add(new ObjectHoverHitbox(tileX, tileY, 0, -16, 32, 16));
-        }
-
-        return list;
-    }
-
 
     public void addDrawables(List<LevelSortedDrawable> list, OrderableDrawables tileList, Level level, int tileX, int tileY, TickManager tickManager, GameCamera camera, PlayerMob perspective) {
         GameLight light = level.getLightLevel(tileX, tileY);
