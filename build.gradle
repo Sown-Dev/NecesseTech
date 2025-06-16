@@ -8,7 +8,7 @@ plugins {
 project.ext.modID = "sown.techmod" // The unique id of your mod. Must be all lowercase and cannot use special characters.
 project.ext.modName = "Necesse Tech" // The display name of your mod.
 project.ext.modVersion = "1.2" // Your current builds version. Must follow the xx.xx... format.
-project.ext.gameVersion = "0.28.1" // The target game version.
+project.ext.gameVersion = "0.32.1" // The target game version.
 project.ext.modDescription = "Adds useful machines" // Short description of what your mod is.
 project.ext.author = "Sown" // Your name
 
@@ -28,7 +28,7 @@ project.ext.clientside = false
 //project.ext.modOptionalDependencies = ["optional.modid1", "optional.modid2"]
 
 // The path to the games install directory
-def gameDirectory = "C:/Program Files (x86)/Steam/steamapps/common/Necesse"
+def gameDirectory = "F:\\Program Files\\Steam\\steamapps\\common\\Necesse"
 
 // =================================================
 // ========== DO NOT EDIT BELOW THIS LINE ==========
