@@ -105,15 +105,6 @@ public class MachinistHumanMob extends HumanShop {
 
     }
 
-    public void showAttack(int x, int y, int seed, boolean showAllDirections) {
-        super.showAttack(x, y, seed, showAllDirections);
-        if (this.isClient() && this.customShowAttack == null) {
-            SoundManager.playSound(GameResources.swing1, SoundEffect.effect(this));
-        }
-
-    }
-
-
     public List<InventoryItem> getRecruitItems(ServerClient client) {
         if (this.isSettler()) {
             return null;
