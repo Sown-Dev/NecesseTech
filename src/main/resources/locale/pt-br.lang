@@ -1,7 +1,7 @@
 [object]
-crusher=Triturador de Minério
-coalengine=Máquina a Vapor a Carvão
-lathe=Torno
+crusher=Triturador de Minérios
+coalengine=Motor a Carvão
+lathe=Torno Mecânico
 recycler=Reciclador
 
 [item]
@@ -9,18 +9,21 @@ irondust=Pó de Ferro
 copperdust=Pó de Cobre
 golddust=Pó de Ouro
 axle=Eixo de Ferro
-caritem=Suporte de Carro Improvisado
+caritem=Base Improvisada de Carro
 coal=Carvão
 
 [mob]
-carmob=Carro Improvisado
+car=Carro Improvisado
 machinisthuman=Mecânico
-machinisthumanname=<nome> o Mecânico
+machinisthumanname=<name>, o Mecânico
 
 [mobmsg]
-machinisttalk1=Você tem alguns parafusos sobressalentes? Eu preciso deles para um projeto em que estou trabalhando.
-machinisttalk2=Já viu um dedo de alguém preso no torno? Coisa horrível.
-machinisttalk3=Esta cidade realmente precisa de ferramentas melhores.
-machinisttalk4=A segurança é minha prioridade número um!
-machinisttalk5=Você viu minha fita métrica?
+machinisttalk1=Você por acaso tem parafusos sobrando? Preciso de alguns para um projeto.
+machinisttalk2=Já viu alguém prender o dedo num torno? É horrível.
+machinisttalk3=Essa cidade realmente precisa de ferramentas melhores.
+machinisttalk4=Segurança é a minha prioridade número um!
+machinisttalk5=Você viu minha trena por aí?
 machinisttalk6=Sabe por que me chamam de mecânico, né?
+
+[misc]
+carplacetip=Para recolher o carro novamente, bata nele com uma arma!
