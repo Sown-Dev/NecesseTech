@@ -1,29 +1,29 @@
 [object]
-crusher=Triturador de Minérios  
-coalengine=Motor a Carvão  
-lathe=Torno Mecânico  
-recycler=Reciclador  
+crusher=Triturador de Minérios
+coalengine=Motor a Carvão
+lathe=Torno Mecânico
+recycler=Reciclador
 
 [item]
-irondust=Pó de Ferro  
-copperdust=Pó de Cobre  
-golddust=Pó de Ouro  
-axle=Eixo de Ferro  
-caritem=Base Improvisada de Carro  
-coal=Carvão  
+irondust=Pó de Ferro
+copperdust=Pó de Cobre
+golddust=Pó de Ouro
+axle=Eixo de Ferro
+caritem=Base Improvisada de Carro
+coal=Carvão
 
 [mob]
-car=Carro Improvisado  
-machinisthuman=Maquinista  
-machinisthumanname=<name>, o Maquinista  
+car=Carro Improvisado
+machinisthuman=Mecânico
+machinisthumanname=<name>, o Mecânico
 
 [mobmsg]
-machinisttalk1=Você por acaso tem parafusos sobrando? Preciso de alguns para um projeto.  
-machinisttalk2=Já viu alguém prender o dedo num torno? É horrível.  
-machinisttalk3=Essa cidade realmente precisa de ferramentas melhores.  
-machinisttalk4=Segurança é a minha prioridade número um!  
-machinisttalk5=Você viu minha trena por aí?  
-machinisttalk6=Sabe por que me chamam de maquinista, né?  
+machinisttalk1=Você por acaso tem parafusos sobrando? Preciso de alguns para um projeto.
+machinisttalk2=Já viu alguém prender o dedo num torno? É horrível.
+machinisttalk3=Essa cidade realmente precisa de ferramentas melhores.
+machinisttalk4=Segurança é a minha prioridade número um!
+machinisttalk5=Você viu minha trena por aí?
+machinisttalk6=Sabe por que me chamam de mecânico, né?
 
 [misc]
 carplacetip=Para recolher o carro novamente, bata nele com uma arma!
